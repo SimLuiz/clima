@@ -4,6 +4,7 @@ document.querySelector('.busca').addEventListener('submit', async (event) => {
     let input = document.querySelector('#searchInput').value;
 
     if (input !=='') {
+        clearInfo();
         showWarning('Carregando...');
 
         let url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(input)}&appid=7b898d4d4a3e86e05b990b543491cae2&units=metric&lang=pt_br`;
@@ -35,6 +36,11 @@ function showInfo(json) {
     document.querySelector('.ventoInfo').innerHTML = `${json.windSpeed} <span>km/h</span>`;
     document.querySelector('.temp img').src = `http://openweathermap.org/img/wn/10d@2x.png`;
     document.querySelector('.ventoPonto').style.transform = `rotate(${json.windAngle-90}deg)`;
+}
+
+function clearInfo() {
+    showWarning('');
+    document.querySelector('.resultado').style.display = 'none';
 }
 
 function showWarning(msg) {
